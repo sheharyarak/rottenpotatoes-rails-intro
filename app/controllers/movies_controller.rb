@@ -7,12 +7,24 @@ class MoviesController < ApplicationController
   end
 
   def index
+    if params[:commit] == "Refresh"
+      if params[:ratings].nil?
+        session[:ratings] = nil
+      else
+        session[:ratings] = params[:ratings]
+      end
+    end
+    
+    if !params[:sort_by].nil?
+       session[:sort_by] = params[:sort_by]
+    end
+    
     @all_ratings = Movie.distinct.pluck(:rating)
-    @ratings_to_show = params[:ratings].nil? ? [] : params[:ratings].keys
+    @ratings_to_show = session[:ratings].nil? ? [] : session[:ratings].keys
     
     @movies = Movie.with_ratings(@ratings_to_show)
-    if !params[:sort_by].nil?
-      @movies = @movies.order(params[:sort_by])
+    if !session[:sort_by].nil?
+      @movies = @movies.order(session[:sort_by])
     end
   end
 

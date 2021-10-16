@@ -17,9 +17,9 @@
   <% end %>
   <thead>
     <tr>
-      <th class="<%= sorted_by(params[:sort_by], "title") %>"><%= link_to "Movie Title", custom_movies_path("title", @ratings_to_show), id: "title_header"%></th>
+      <th class="<%= sorted_by(session[:sort_by], "title") %>"><%= link_to "Movie Title", custom_movies_path("title", @ratings_to_show), id: "title_header"%></th>
       <th>Rating</th>
-      <th class="<%= sorted_by(params[:sort_by], "release_date") %>"><%= link_to "Release Date", custom_movies_path("release_date", @ratings_to_show), id: "release_date_header"%></th>
+      <th class="<%= sorted_by(session[:sort_by], "release_date") %>"><%= link_to "Release Date", custom_movies_path("release_date", @ratings_to_show), id: "release_date_header"%></th>
       <th>More Info</th>
     </tr>
   </thead>
